@@ -158,11 +158,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animate mobile about images on scroll
     const aboutImgs = document.querySelectorAll('.mobile-images .about-img');
     if ('IntersectionObserver' in window && aboutImgs.length > 0) {
-        const observer = new IntersectionObserver((entries, obs) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
-                    obs.unobserve(entry.target);
+                } else {
+                    entry.target.classList.remove('in-view');
                 }
             });
         }, {
@@ -172,5 +173,35 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Fallback: show all if IntersectionObserver not supported
         aboutImgs.forEach(img => img.classList.add('in-view'));
+    }
+
+    // Dynamically set margin-top on .push-down to header height
+    function adjustPushDown() {
+        const header = document.querySelector('.header');
+        const pushDown = document.querySelector('.push-down');
+        if (header && pushDown) {
+            pushDown.style.marginTop = header.offsetHeight + 'px';
+        }
+    }
+    adjustPushDown();
+    window.addEventListener('resize', adjustPushDown);
+
+    // Animate desktop about us image on scroll
+    const aboutImgLarge = document.querySelector('.about-img-large');
+    if ('IntersectionObserver' in window && aboutImgLarge) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    aboutImgLarge.classList.add('animated-in');
+                } else {
+                    aboutImgLarge.classList.remove('animated-in');
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+        observer.observe(aboutImgLarge);
+    } else if (aboutImgLarge) {
+        aboutImgLarge.classList.add('animated-in');
     }
 }); 

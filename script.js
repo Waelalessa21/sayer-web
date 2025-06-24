@@ -155,24 +155,108 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Animate mobile about images on scroll
+    // Advanced scroll animation for about-sayer images with sophisticated effects
     const aboutImgs = document.querySelectorAll('.mobile-images .about-img');
-    if ('IntersectionObserver' in window && aboutImgs.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                } else {
-                    entry.target.classList.remove('in-view');
+    const aboutImgLarge = document.querySelector('.about-img-large');
+    
+    if ('IntersectionObserver' in window) {
+        // Mobile images animation with enhanced effects
+        if (aboutImgs.length > 0) {
+            const mobileObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(aboutImgs).indexOf(entry.target);
+                        const delay = 0.2 * index; // Increased delay for more dramatic effect
+                        
+                        // Add a subtle bounce effect by slightly adjusting the timing
+                        entry.target.style.animationDelay = delay + 's';
+                        
+                        // Add a class for additional effects
+                        entry.target.classList.add('in-view');
+                        
+                        // Add a subtle scale effect on scroll
+                        const handleScroll = () => {
+                            const rect = entry.target.getBoundingClientRect();
+                            const scrolled = window.pageYOffset;
+                            const rate = scrolled * -0.5;
+                            const opacity = Math.max(0.3, 1 - (rect.top - window.innerHeight) / window.innerHeight);
+                            
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                entry.target.style.transform = `translateY(${rate * 0.1}px) scale(${1 + opacity * 0.05})`;
+                            }
+                        };
+                        
+                        window.addEventListener('scroll', handleScroll, { passive: true });
+                        
+                        obs.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, {
+                threshold: 0.1, // Trigger when 10% of the element is visible
+                rootMargin: '0px 0px -50px 0px' // Start animation slightly before element comes into view
+            });
+            
+            aboutImgs.forEach(img => {
+                mobileObserver.observe(img);
+                
+                // Check if image is already in view on page load
+                if (img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom > 0) {
+                    const index = Array.from(aboutImgs).indexOf(img);
+                    const delay = 0.2 * index;
+                    img.style.animationDelay = delay + 's';
+                    img.classList.add('in-view');
+                    mobileObserver.unobserve(img);
                 }
             });
-        }, {
-            threshold: 0.3
-        });
-        aboutImgs.forEach(img => observer.observe(img));
+        }
+        
+        // Desktop image animation with enhanced effects
+        if (aboutImgLarge) {
+            const desktopObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add a subtle parallax effect
+                        const handleScroll = () => {
+                            const rect = entry.target.getBoundingClientRect();
+                            const scrolled = window.pageYOffset;
+                            const rate = scrolled * -0.3;
+                            
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                entry.target.style.transform = `translateY(${rate * 0.1}px) scale(1) rotateY(0deg)`;
+                            }
+                        };
+                        
+                        window.addEventListener('scroll', handleScroll, { passive: true });
+                        
+                        aboutImgLarge.classList.add('animated-in');
+                    } else {
+                        aboutImgLarge.classList.remove('animated-in');
+                    }
+                });
+            }, {
+                threshold: 0.2, // Trigger when 20% of the element is visible
+                rootMargin: '0px 0px -100px 0px' // Start animation earlier
+            });
+            
+            desktopObserver.observe(aboutImgLarge);
+            
+            // Check if desktop image is already in view on page load
+            if (aboutImgLarge.getBoundingClientRect().top < window.innerHeight && aboutImgLarge.getBoundingClientRect().bottom > 0) {
+                aboutImgLarge.classList.add('animated-in');
+            }
+        }
     } else {
-        // Fallback: show all if IntersectionObserver not supported
-        aboutImgs.forEach(img => img.classList.add('in-view'));
+        // Fallback for browsers without IntersectionObserver
+        if (aboutImgs.length > 0) {
+            aboutImgs.forEach((img, i) => {
+                img.style.animationDelay = (0.2 * i) + 's';
+                img.classList.add('in-view');
+            });
+        }
+        
+        if (aboutImgLarge) {
+            aboutImgLarge.classList.add('animated-in');
+        }
     }
 
     // Dynamically set margin-top on .push-down to header height
@@ -186,22 +270,28 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustPushDown();
     window.addEventListener('resize', adjustPushDown);
 
-    // Animate desktop about us image on scroll
-    const aboutImgLarge = document.querySelector('.about-img-large');
-    if ('IntersectionObserver' in window && aboutImgLarge) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    aboutImgLarge.classList.add('animated-in');
-                } else {
-                    aboutImgLarge.classList.remove('animated-in');
-                }
-            });
-        }, {
-            threshold: 0.3
-        });
-        observer.observe(aboutImgLarge);
-    } else if (aboutImgLarge) {
-        aboutImgLarge.classList.add('animated-in');
+    // Loader overlay logic for hero image only
+    const loader = document.getElementById('sayer-loader');
+    const heroImg = document.querySelector('.hero-mockup-img');
+    const heroSection = document.querySelector('.hero-section');
+    if (!loader || !heroImg) return;
+
+    function animateHeroSection() {
+        if (heroSection) heroSection.classList.add('hero-animate');
+    }
+
+    function hideLoader() {
+        loader.classList.add('loaded');
+        setTimeout(() => {
+            loader.remove();
+            animateHeroSection();
+        }, 500);
+    }
+
+    if (heroImg.complete) {
+        hideLoader();
+    } else {
+        heroImg.addEventListener('load', hideLoader);
+        heroImg.addEventListener('error', hideLoader);
     }
 }); 

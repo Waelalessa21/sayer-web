@@ -1,0 +1,23 @@
+#sayer-loader {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    background: #f0f8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s;
+}
+.loader-logo {
+    width: 90px;
+    height: 90px;
+    animation: loaderSpin 1.2s linear infinite;
+}
+@keyframes loaderSpin {
+    0% { transform: rotateY(0deg);}
+    100% { transform: rotateY(360deg);}
+}
+#sayer-loader.loaded {
+    opacity: 0;
+    pointer-events: none;
+} 

@@ -547,7 +547,8 @@ body::after {
     flex-direction: row-reverse;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 2rem;                
+    gap: 2rem;    
+    overflow-x: hidden;            
     width: 100%;
 }
 

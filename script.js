@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.header');
     const headerContent = document.querySelector('.header-content');
@@ -295,3 +296,4 @@ document.addEventListener('DOMContentLoaded', function() {
         heroImg.addEventListener('error', hideLoader);
     }
 }); 
+

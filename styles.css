@@ -688,6 +688,7 @@ body::after {
         flex-direction: column-reverse;
         align-items: stretch;
         justify-content: flex-start;
+        overflow-x: hidden;
     }
     .hero-text-col {
         width: 100%;

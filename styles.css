@@ -23,7 +23,7 @@ body {
     font-family: 'IBM Plex Sans Arabic', sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
-    background: linear-gradient(135deg, #fafbff 0%, #f8fbff 25%, #ffffff 50%, #f8fbff 75%, #fafbff 100%);
+    background: #f0f8ff;
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;

@@ -655,12 +655,14 @@ body::after {
         flex-direction: column-reverse;
         gap: 1.5rem;
         text-align: center;
+        overflow-x: hidden;
     }
     .hero-img-col,
     .hero-text-col {
         justify-content: center;
         align-items: center;
         text-align: center;
+        
     }
     .hero-mockup-img {
         max-width: 420px;

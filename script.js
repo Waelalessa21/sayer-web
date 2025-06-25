@@ -236,5 +236,29 @@ document.addEventListener('DOMContentLoaded', function() {
         heroImg.addEventListener('load', hideLoader);
         heroImg.addEventListener('error', hideLoader);
     }
+
+    // Soft fade-in-up animation for mobile images on scroll
+    const aboutImgs = document.querySelectorAll('.mobile-images .about-img');
+    if ('IntersectionObserver' in window && aboutImgs.length > 0) {
+        const mobileObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(aboutImgs).indexOf(entry.target);
+                    entry.target.style.animationDelay = (index * 0.15) + 's';
+                    entry.target.classList.add('in-view');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        aboutImgs.forEach(img => {
+            mobileObserver.observe(img);
+        });
+    } else if (aboutImgs.length > 0) {
+        // Fallback: show all if no IntersectionObserver
+        aboutImgs.forEach(img => img.classList.add('in-view'));
+    }
 }); 
 

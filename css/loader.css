@@ -8,16 +8,20 @@
     justify-content: center;
     transition: opacity 0.4s;
 }
+
 .loader-logo {
-    width: 90px;
-    height: 90px;
-    animation: loaderSpin 1.2s linear infinite;
+    width: 60px;
+    height: 60px;
+    animation: loaderSpin 1s linear infinite;
+    will-change: transform;
 }
+
 @keyframes loaderSpin {
-    0% { transform: rotateY(0deg);}
-    100% { transform: rotateY(360deg);}
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
+
 #sayer-loader.loaded {
     opacity: 0;
     pointer-events: none;
-} 
+}

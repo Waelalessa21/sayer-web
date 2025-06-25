@@ -1,13 +1,38 @@
+.push-down {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+.hero-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+.hero-section > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+.hero-title {
+    margin-top: 0 !important;
+}
+body, main, .header, .push-down, .hero-section, .hero-section > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .hero-section {
     max-width: 1200px;
     min-height: auto;          
     margin: 0 auto;
-    padding: 0 2.5rem;       
+    padding: 0 3rem;       
     display: flex;
     align-items: flex-start; 
     justify-content: center;
     background: none;
-    overflow-x: hidden;
 }
 
 .hero-flex {
@@ -15,20 +40,22 @@
     flex-direction: row-reverse;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 2rem;                
+    gap: 2rem;    
     width: 100%;
-    overflow-x: hidden;
+  
 }
 
 .hero-img-col {
     flex: 1 1 0;
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+    overflow: visible;
 }
 
 .hero-mockup-img {
-    max-width: 750px;        
-    width: 120%;
+    max-width: 900px;       
+    width: 110%;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -53,9 +80,8 @@
     will-change: opacity, transform;
 }
 
-
 .hero-title-main {
-    font-size: 4rem;
+    font-size: 3.8rem;
     font-weight: 900;
     color: var(--primary-color);
     margin: 0;
@@ -64,21 +90,23 @@
 }
 
 .hero-sub {
-    font-size: 2.6rem;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-size: 3rem;
+    font-weight: 900;
+    color: black;
     margin: 0.5rem;
     line-height: 1.2;
     will-change: opacity, transform;
 }
 
 .hero-multiline {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.7;
     text-align: right;
     will-change: opacity, transform;
 }
+
+
 
 .hero-title-main, .hero-sub, .hero-multiline, .hero-mockup-img {
   opacity: 0;
@@ -122,12 +150,14 @@
         flex-direction: column-reverse;
         gap: 1.5rem;
         text-align: center;
+        overflow-x: hidden;
     }
     .hero-img-col,
     .hero-text-col {
         justify-content: center;
         align-items: center;
         text-align: center;
+        
     }
     .hero-mockup-img {
         max-width: 420px;
@@ -153,6 +183,7 @@
         flex-direction: column-reverse;
         align-items: stretch;
         justify-content: flex-start;
+        overflow-x: hidden;
     }
     .hero-text-col {
         width: 100%;
@@ -174,10 +205,10 @@
         padding-right: 20rem;
       }
     .hero-title-main {
-        font-size: 2rem;
+        font-size: 2.4rem;
     }
     .hero-sub {
-        font-size: 1rem;
+        font-size: 2.2rem;
     }
     .hero-multiline {
         font-size: 1rem;
@@ -192,14 +223,61 @@
     }
   
     .hero-title-main {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
     }
     .hero-sub {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     .hero-multiline {
-        font-size: 0.8rem;
+        font-size: 1rem;
         text-align: center;
     }
 
-} 
+}
+
+main {
+    padding-top: 0;
+}
+.push-down {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding-top: 5.5rem;
+    }
+}
+
+.download-image {
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    display: block;
+    margin: 1rem auto;
+    will-change: opacity, transform;
+}
+
+.hero-download-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0.4rem auto;
+    line-height: 1.3;
+    text-align: center;
+    will-change: opacity, transform;
+    cursor: pointer;
+}
+
+.hero-title-main, .hero-sub, .hero-multiline, .hero-mockup-img, .download-image, .hero-download-text {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: opacity, transform;
+}
+
+.hero-animate .download-image {
+    animation: heroFadeUp 0.6s 1.0s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.hero-animate .hero-download-text {
+    animation: heroFadeUp 0.6s 1.3s cubic-bezier(0.4,0,0.2,1) forwards;
+}

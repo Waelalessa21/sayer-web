@@ -27,7 +27,6 @@ body {
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
-    width: 100%;
 }
 
 body::before {
@@ -77,18 +76,3 @@ body::after {
     padding: 0 20px;
     position: relative;
 }
-
-main {
-    padding-top: 0;
-    overflow-x: hidden;
-    width: 100%;
-}
-.push-down {
-    margin-top: 0;
-}
-
-@media (max-width: 768px) {
-    main {
-        padding-top: 5.5rem;
-    }
-} 

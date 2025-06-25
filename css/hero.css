@@ -267,7 +267,6 @@ main {
     will-change: opacity, transform;
     cursor: pointer;
 }
-
 .hero-title-main, .hero-sub, .hero-multiline, .hero-mockup-img, .download-image, .hero-download-text {
     opacity: 0;
     transform: translateY(40px);
@@ -281,3 +280,4 @@ main {
 .hero-animate .hero-download-text {
     animation: heroFadeUp 0.6s 1.3s cubic-bezier(0.4,0,0.2,1) forwards;
 }
+

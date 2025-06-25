@@ -216,26 +216,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const loader = document.getElementById('sayer-loader');
     const heroImg = document.querySelector('.hero-mockup-img');
     const heroSection = document.querySelector('.hero-section');
-    if (!loader || !heroImg) return;
-
     function animateHeroSection() {
         if (heroSection) heroSection.classList.add('hero-animate');
     }
-
+    
     function hideLoader() {
-        loader.classList.add('loaded');
-        setTimeout(() => {
-            loader.remove();
-            animateHeroSection();
-        }, 500);
+        if (!loader.classList.contains('loaded')) {
+            loader.classList.add('loaded');
+            setTimeout(() => {
+                loader.remove();
+                animateHeroSection();
+            }, 500);
+        }
     }
-
-    if (heroImg.complete) {
+    
+    // Always hide loader after max timeout (failsafe)
+    setTimeout(hideLoader, 4000);
+    
+    // Only hide earlier if image loads successfully
+    if (heroImg && heroImg.complete) {
         hideLoader();
-    } else {
+    } else if (heroImg) {
         heroImg.addEventListener('load', hideLoader);
         heroImg.addEventListener('error', hideLoader);
+    } else {
+        // If heroImg doesn't exist (e.g. mobile view), still hide
+        hideLoader();
     }
+    
 
     // Soft fade-in-up animation for mobile images on scroll
     const aboutImgs = document.querySelectorAll('.mobile-images .about-img');

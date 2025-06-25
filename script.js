@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.header');
     const headerContent = document.querySelector('.header-content');
@@ -157,60 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Advanced scroll animation for about-sayer images with sophisticated effects
-    const aboutImgs = document.querySelectorAll('.mobile-images .about-img');
     const aboutImgLarge = document.querySelector('.about-img-large');
     
     if ('IntersectionObserver' in window) {
-        // Mobile images animation with enhanced effects
-        if (aboutImgs.length > 0) {
-            const mobileObserver = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const index = Array.from(aboutImgs).indexOf(entry.target);
-                        const delay = 0.2 * index; // Increased delay for more dramatic effect
-                        
-                        // Add a subtle bounce effect by slightly adjusting the timing
-                        entry.target.style.animationDelay = delay + 's';
-                        
-                        // Add a class for additional effects
-                        entry.target.classList.add('in-view');
-                        
-                        // Add a subtle scale effect on scroll
-                        const handleScroll = () => {
-                            const rect = entry.target.getBoundingClientRect();
-                            const scrolled = window.pageYOffset;
-                            const rate = scrolled * -0.5;
-                            const opacity = Math.max(0.3, 1 - (rect.top - window.innerHeight) / window.innerHeight);
-                            
-                            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                                entry.target.style.transform = `translateY(${rate * 0.1}px) scale(${1 + opacity * 0.05})`;
-                            }
-                        };
-                        
-                        window.addEventListener('scroll', handleScroll, { passive: true });
-                        
-                        obs.unobserve(entry.target); // Only animate once
-                    }
-                });
-            }, {
-                threshold: 0.1, // Trigger when 10% of the element is visible
-                rootMargin: '0px 0px -50px 0px' // Start animation slightly before element comes into view
-            });
-            
-            aboutImgs.forEach(img => {
-                mobileObserver.observe(img);
-                
-                // Check if image is already in view on page load
-                if (img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom > 0) {
-                    const index = Array.from(aboutImgs).indexOf(img);
-                    const delay = 0.2 * index;
-                    img.style.animationDelay = delay + 's';
-                    img.classList.add('in-view');
-                    mobileObserver.unobserve(img);
-                }
-            });
-        }
-        
         // Desktop image animation with enhanced effects
         if (aboutImgLarge) {
             const desktopObserver = new IntersectionObserver((entries) => {
@@ -248,13 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     } else {
         // Fallback for browsers without IntersectionObserver
-        if (aboutImgs.length > 0) {
-            aboutImgs.forEach((img, i) => {
-                img.style.animationDelay = (0.2 * i) + 's';
-                img.classList.add('in-view');
-            });
-        }
-        
         if (aboutImgLarge) {
             aboutImgLarge.classList.add('animated-in');
         }

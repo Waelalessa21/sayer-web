@@ -9,19 +9,112 @@
     transition: opacity 0.4s;
 }
 
+.loader-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.progress-ring-svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle-bg {
+    fill: none;
+    stroke: rgba(74, 99, 246, 0.1);
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: #4A63F6;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 339.292;
+    animation: progressAnimation 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(74, 99, 246, 0.3));
+}
+
 .loader-logo {
     width: 60px;
     height: 60px;
-    animation: loaderSpin 1s linear infinite;
+    animation: loaderPulse 2s ease-in-out infinite;
     will-change: transform;
+    filter: drop-shadow(0 2px 8px rgba(74, 99, 246, 0.2));
 }
 
-@keyframes loaderSpin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes progressAnimation {
+    0% {
+        stroke-dashoffset: 339.292;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: -339.292;
+    }
+}
+
+@keyframes loaderPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
 }
 
 #sayer-loader.loaded {
     opacity: 0;
     pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .progress-ring-svg {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .progress-ring-circle-bg,
+    .progress-ring-circle {
+        cx: 50;
+        cy: 50;
+        r: 45;
+        stroke-width: 1;
+    }
+    
+    .loader-logo {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-ring-svg {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .progress-ring-circle-bg,
+    .progress-ring-circle {
+        cx: 40;
+        cy: 40;
+        r: 36;
+        stroke-width: 1;
+    }
+    
+    .loader-logo {
+        width: 40px;
+        height: 40px;
+    }
 }

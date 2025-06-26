@@ -74,7 +74,7 @@
 
         <section class="about-sayer-section">
             <div class="about-sayer-text">
-                <h2 class="about-sayer-title">تعرف على <span class="sayer-bold">ساير؟</span></h2>
+                <h2 class="about-sayer-title"><span style="color:#4A63F6; font-weight:bold;">وش يميّز </span> <span class="sayer-bold">ساير؟</span></h2>
                 <p class="about-sayer-desc">ساير هي منصة وساطة رقمية تجمع لك عروض السيارات من جميع الوكالات في منصة واحدة.</p>
             </div>
             <!-- Mobile: 5 animated images stacked vertically -->
@@ -113,9 +113,8 @@
               <div class="partners-header">
                 <div class="title-with-icon">
                   <h2 class="partners-title">شركاؤنا</h2>
-                  <img src="assets/icons/user.png" alt="شركاؤنا" class="section-icon">
                 </div>
-                <p class="partners-subtitle">نعمل مع أفضل الوكالات والشركات في مجال السيارات</p>
+                <p class="partners-subtitle">تعرف على الشركات و الجهات التي تعمل معنا</p>
               </div>
           
               <div class="partners-image-container">
@@ -130,7 +129,6 @@
                 <div class="faq-header">
                     <div class="title-with-icon">
                       <h2 class="faq-title">الأسئلة الشائعة</h2>
-                      <img src="assets/icons/help.png" alt="الأسئلة الشائعة" class="section-icon">
                     </div>
                     <p class="faq-subtitle">إعرف عن ساير أكثر</p>
                 </div>
@@ -247,7 +245,7 @@
                     <ul class="footer-links">
                         <li><a href="#features" class="footer-link">المزايا</a></li>
                         <li><a href="#faq" class="footer-link">الأسئلة الشائعة</a></li>
-                        <li><a href="#privacy" class="footer-link">سياسة الخصوصية</a></li>
+                        <li><a href ="privacy.html" class="footer-link">سياسة الخصوصية</a></li>
                     </ul>
                 </div>
 
@@ -305,7 +303,15 @@
     </footer>
 
     <div id="sayer-loader">
-      <img src="assets/logo/app-logo.png" alt="Sayer Logo" class="loader-logo" />
+      <div class="loader-container">
+        <div class="progress-ring">
+          <svg class="progress-ring-svg" width="120" height="120">
+            <circle class="progress-ring-circle-bg" cx="60" cy="60" r="54" stroke-width="4"/>
+            <circle class="progress-ring-circle" cx="60" cy="60" r="54" stroke-width="4"/>
+          </svg>
+        </div>
+        <img src="assets/logo/app-logo.png" alt="Sayer Logo" class="loader-logo" />
+      </div>
     </div>
 
     <script src="script.js"></script>

@@ -76,3 +76,129 @@ body::after {
     padding: 0 20px;
     position: relative;
 }
+
+/* New Section Styles */
+.new-section {
+    padding: 80px 0;
+}
+.mobile-only {
+    display: none;
+}
+
+.new-section-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-direction: row-reverse;
+}
+
+.new-section-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.new-section-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.new-section-text {
+    flex: 1;
+    padding: 20px 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.new-section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.new-section-desc {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.new-section-mobile-image {
+    display: none;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.new-section-mobile-img {
+    width: 80%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .new-section {
+        padding: 60px 20px;
+    }
+    
+    .new-section-content {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .new-section-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .new-section-desc {
+        font-size: 1rem;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .mobile-only {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .new-section {
+        padding: 40px 15px;
+    }
+    
+    .new-section-title {
+        font-size: 1.8rem;
+    }
+    
+    .new-section-desc {
+        font-size: 0.95rem;
+    }
+    
+    .new-section-mobile-img {
+        width: 80%;
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

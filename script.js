@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Desktop navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile navigation links
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -53,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
-            // Close mobile menu after navigation
             if (mobileMenuRow.classList.contains('active')) {
                 mobileMenuRow.classList.remove('active');
                 mobileHeader.classList.remove('hide');
@@ -74,38 +71,32 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = '';
         }, 150);
         
-        // Close mobile menu after download button click
         if (mobileMenuRow.classList.contains('active')) {
             mobileMenuRow.classList.remove('active');
             mobileHeader.classList.remove('hide');
         }
     });
 
-    // Mobile burger menu functionality
     if (burger && mobileMenuRow && mobileHeader) {
         burger.addEventListener('click', function(e) {
             e.stopPropagation();
             
             if (mobileMenuRow.classList.contains('active')) {
-                // Close menu
                 mobileMenuRow.classList.remove('active');
                 mobileHeader.classList.remove('hide');
                 
-                // Reset animations for next time
                 const mobileItems = mobileMenuRow.querySelectorAll('.mobile-nav-link, .mobile-download-btn');
                 mobileItems.forEach(item => {
                     item.style.animation = 'none';
-                    item.offsetHeight; // Trigger reflow
+                    item.offsetHeight; 
                     item.style.animation = '';
                 });
             } else {
-                // Open menu
                 mobileMenuRow.classList.add('active');
                 mobileHeader.classList.add('hide');
             }
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (mobileMenuRow.classList.contains('active') && 
                 !mobileMenuRow.contains(e.target) && 
@@ -113,34 +104,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 mobileMenuRow.classList.remove('active');
                 mobileHeader.classList.remove('hide');
                 
-                // Reset animations for next time
                 const mobileItems = mobileMenuRow.querySelectorAll('.mobile-nav-link, .mobile-download-btn');
                 mobileItems.forEach(item => {
                     item.style.animation = 'none';
-                    item.offsetHeight; // Trigger reflow
+                    item.offsetHeight; 
                     item.style.animation = '';
                 });
             }
         });
 
-        // Close menu on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 mobileMenuRow.classList.remove('active');
                 mobileHeader.classList.remove('hide');
                 
-                // Reset animations for next time
                 const mobileItems = mobileMenuRow.querySelectorAll('.mobile-nav-link, .mobile-download-btn');
                 mobileItems.forEach(item => {
                     item.style.animation = 'none';
-                    item.offsetHeight; // Trigger reflow
+                    item.offsetHeight; 
                     item.style.animation = '';
                 });
             }
         });
     }
 
-    // Close mobile menu when clicking outside (for desktop header compatibility)
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 768 && headerContent.classList.contains('menu-open')) {
             if (!headerContent.contains(e.target)) {
@@ -155,16 +142,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Advanced scroll animation for about-sayer images with sophisticated effects
     const aboutImgLarge = document.querySelector('.about-img-large');
     
     if ('IntersectionObserver' in window) {
-        // Desktop image animation with enhanced effects
         if (aboutImgLarge) {
             const desktopObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Add a subtle parallax effect
                         const handleScroll = () => {
                             const rect = entry.target.getBoundingClientRect();
                             const scrolled = window.pageYOffset;
@@ -183,25 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }, {
-                threshold: 0.2, // Trigger when 20% of the element is visible
-                rootMargin: '0px 0px -100px 0px' // Start animation earlier
-            });
+                threshold: 0.2, 
+                rootMargin: '0px 0px -100px 0px' });
             
             desktopObserver.observe(aboutImgLarge);
             
-            // Check if desktop image is already in view on page load
             if (aboutImgLarge.getBoundingClientRect().top < window.innerHeight && aboutImgLarge.getBoundingClientRect().bottom > 0) {
                 aboutImgLarge.classList.add('animated-in');
             }
         }
     } else {
-        // Fallback for browsers without IntersectionObserver
         if (aboutImgLarge) {
             aboutImgLarge.classList.add('animated-in');
         }
     }
 
-    // Dynamically set margin-top on .push-down to header height
     function adjustPushDown() {
         const header = document.querySelector('.header');
         const pushDown = document.querySelector('.push-down');
@@ -212,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustPushDown();
     window.addEventListener('resize', adjustPushDown);
 
-    // Loader overlay logic - improved for mobile compatibility
     const loader = document.getElementById('sayer-loader');
     const heroImg = document.querySelector('.hero-mockup-img');
     const heroSection = document.querySelector('.hero-section');
@@ -226,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateProgress(progress) {
         if (progressCircle) {
-            const radius = 54; // Fixed radius for the viewBox="0 0 120 120"
+            const radius = 54; 
             const circumference = 2 * Math.PI * radius;
             const offset = circumference - (progress / 100) * circumference;
             progressCircle.style.strokeDashoffset = offset;
@@ -241,62 +220,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
 
-    // Initialize progress
     updateProgress(0);
 
-    // Simulate progress while waiting for hero image
     let progress = 0;
     const progressInterval = setInterval(() => {
         progress += 1;
-        updateProgress(Math.min(progress, 90)); // Cap at 90% until image loads
-        
+        updateProgress(Math.min(progress, 90)); 
         if (progress >= 90) {
             clearInterval(progressInterval);
         }
-    }, 30); // 30ms intervals for smooth animation
+    }, 30); 
 
-    // Check if page is already loaded
-    if (document.readyState === 'complete') {
-        clearInterval(progressInterval);
-        updateProgress(100);
-        setTimeout(hideLoader, 200);
+    // Only finish loader when hero image is fully loaded
+    if (heroImg) {
+        if (heroImg.complete && heroImg.naturalWidth > 0) {
+            // Image is already loaded
+            clearInterval(progressInterval);
+            updateProgress(100);
+            setTimeout(hideLoader, 200);
+        } else {
+            // Wait for image to load
+            heroImg.addEventListener('load', () => {
+                clearInterval(progressInterval);
+                updateProgress(100);
+                setTimeout(hideLoader, 200);
+            });
+            
+            // Handle image load error - still hide loader but log error
+            heroImg.addEventListener('error', () => {
+                console.warn('Hero image failed to load');
+                clearInterval(progressInterval);
+                updateProgress(100);
+                setTimeout(hideLoader, 200);
+            });
+        }
     } else {
-        // Listen for multiple load events
+        // Fallback if hero image doesn't exist - wait for window load
         window.addEventListener('load', () => {
             clearInterval(progressInterval);
             updateProgress(100);
             setTimeout(hideLoader, 200);
         });
-        
-        // Check hero image if it exists
-        if (heroImg) {
-            if (heroImg.complete) {
-                clearInterval(progressInterval);
-                updateProgress(100);
-                setTimeout(hideLoader, 200);
-            } else {
-                heroImg.addEventListener('load', () => {
-                    clearInterval(progressInterval);
-                    updateProgress(100);
-                    setTimeout(hideLoader, 200);
-                });
-                heroImg.addEventListener('error', () => {
-                    clearInterval(progressInterval);
-                    updateProgress(100);
-                    setTimeout(hideLoader, 200);
-                });
-            }
-        }
-        
-        // Fallback timeout to ensure loader disappears (especially for mobile)
-        setTimeout(() => {
-            clearInterval(progressInterval);
-            updateProgress(100);
-            hideLoader();
-        }, 4000);
     }
 
-    // Soft fade-in-up animation for mobile images on scroll
     const aboutImgs = document.querySelectorAll('.mobile-images .about-img');
     if ('IntersectionObserver' in window && aboutImgs.length > 0) {
         const mobileObserver = new IntersectionObserver((entries, obs) => {
@@ -316,7 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileObserver.observe(img);
         });
     } else if (aboutImgs.length > 0) {
-        // Fallback: show all if no IntersectionObserver
         aboutImgs.forEach(img => img.classList.add('in-view'));
     }
 }); 

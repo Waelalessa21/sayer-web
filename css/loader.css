@@ -14,40 +14,52 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 120px;
+    height: 120px;
 }
 
 .progress-ring {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .progress-ring-svg {
+    width: 100%;
+    height: 100%;
     transform: rotate(-90deg);
 }
 
 .progress-ring-circle-bg {
     fill: none;
     stroke: rgba(74, 99, 246, 0.1);
+    stroke-width: 4;
 }
 
 .progress-ring-circle {
     fill: none;
     stroke: #4A63F6;
     stroke-linecap: round;
+    stroke-width: 4;
     stroke-dasharray: 339.292;
     stroke-dashoffset: 339.292;
-    animation: progressAnimation 3s ease-out forwards;
     filter: drop-shadow(0 0 8px rgba(74, 99, 246, 0.3));
+    transition: stroke-dashoffset 0.1s ease-out;
 }
 
 .loader-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
     animation: loaderPulse 3s ease-out forwards;
     will-change: transform;
     filter: drop-shadow(0 2px 8px rgba(74, 99, 246, 0.2));
+    z-index: 1;
 }
 
 @keyframes progressAnimation {
@@ -61,15 +73,15 @@
 
 @keyframes loaderPulse {
     0% {
-        transform: scale(0.8);
+        transform: translate(-50%, -50%) scale(0.8);
         opacity: 0.5;
     }
     50% {
-        transform: scale(1.1);
+        transform: translate(-50%, -50%) scale(1.1);
         opacity: 1;
     }
     100% {
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
 }
@@ -81,16 +93,13 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .progress-ring-svg {
+    .loader-container {
         width: 110px;
         height: 110px;
     }
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        cx: 55;
-        cy: 55;
-        r: 49;
         stroke-width: 3.5;
     }
     
@@ -101,16 +110,13 @@
 }
 
 @media (max-width: 768px) {
-    .progress-ring-svg {
+    .loader-container {
         width: 100px;
         height: 100px;
     }
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        cx: 50;
-        cy: 50;
-        r: 45;
         stroke-width: 3;
     }
     
@@ -121,16 +127,13 @@
 }
 
 @media (max-width: 480px) {
-    .progress-ring-svg {
+    .loader-container {
         width: 90px;
         height: 90px;
     }
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        cx: 45;
-        cy: 45;
-        r: 40;
         stroke-width: 2.5;
     }
     
@@ -141,16 +144,13 @@
 }
 
 @media (max-width: 360px) {
-    .progress-ring-svg {
+    .loader-container {
         width: 80px;
         height: 80px;
     }
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        cx: 40;
-        cy: 40;
-        r: 35;
         stroke-width: 2;
     }
     

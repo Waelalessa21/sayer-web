@@ -216,11 +216,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const loader = document.getElementById('sayer-loader');
     const heroImg = document.querySelector('.hero-mockup-img');
     const heroSection = document.querySelector('.hero-section');
+    const progressCircle = document.querySelector('.progress-ring-circle');
     
     if (!loader) return;
 
     function animateHeroSection() {
         if (heroSection) heroSection.classList.add('hero-animate');
+    }
+
+    function updateProgress(progress) {
+        if (progressCircle) {
+            const radius = 54; // Fixed radius for the viewBox="0 0 120 120"
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (progress / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
     }
 
     function hideLoader() {
@@ -231,25 +241,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
 
+    // Initialize progress
+    updateProgress(0);
+
+    // Simulate progress while waiting for hero image
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += 1;
+        updateProgress(Math.min(progress, 90)); // Cap at 90% until image loads
+        
+        if (progress >= 90) {
+            clearInterval(progressInterval);
+        }
+    }, 30); // 30ms intervals for smooth animation
+
     // Check if page is already loaded
     if (document.readyState === 'complete') {
-        hideLoader();
+        clearInterval(progressInterval);
+        updateProgress(100);
+        setTimeout(hideLoader, 200);
     } else {
         // Listen for multiple load events
-        window.addEventListener('load', hideLoader);
+        window.addEventListener('load', () => {
+            clearInterval(progressInterval);
+            updateProgress(100);
+            setTimeout(hideLoader, 200);
+        });
         
         // Check hero image if it exists
         if (heroImg) {
             if (heroImg.complete) {
-                hideLoader();
+                clearInterval(progressInterval);
+                updateProgress(100);
+                setTimeout(hideLoader, 200);
             } else {
-                heroImg.addEventListener('load', hideLoader);
-                heroImg.addEventListener('error', hideLoader);
+                heroImg.addEventListener('load', () => {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    setTimeout(hideLoader, 200);
+                });
+                heroImg.addEventListener('error', () => {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    setTimeout(hideLoader, 200);
+                });
             }
         }
         
         // Fallback timeout to ensure loader disappears (especially for mobile)
-        setTimeout(hideLoader, 4000);
+        setTimeout(() => {
+            clearInterval(progressInterval);
+            updateProgress(100);
+            hideLoader();
+        }, 4000);
     }
 
     // Soft fade-in-up animation for mobile images on scroll

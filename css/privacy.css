@@ -1,24 +1,3 @@
-/* Privacy Policy Page Styles */
-.privacy-hero {
-    background: linear-gradient(135deg, #4A63F6 0%, #7C3AED 100%);
-    color: #ffffff;
-    padding: 4rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.privacy-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
-}
-
 .privacy-hero-content {
     position: relative;
     z-index: 1;
@@ -27,12 +6,7 @@
     padding: 0 1rem;
 }
 
-.privacy-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    line-height: 1.2;
-}
+
 
 .privacy-subtitle {
     font-size: 1.25rem;
@@ -42,7 +16,6 @@
     line-height: 1.6;
 }
 
-/* Privacy Content Section */
 .privacy-content {
     padding: 4rem 0;
     background: #f0f8ff;
@@ -56,7 +29,7 @@
 }
 
 .policy-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #333333;
     margin: 0 0 1.5rem 0;
@@ -105,7 +78,6 @@
     margin-bottom: 0;
 }
 
-/* Privacy Sections */
 .privacy-sections {
     max-width: 900px;
     margin: 0 auto;
@@ -197,7 +169,6 @@
     font-size: 1.1rem;
 }
 
-/* Animation for sections */
 .privacy-section {
     opacity: 0;
     transform: translateY(30px);
@@ -223,7 +194,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .privacy-title {
-        font-size: 3rem;
+        font-size: 1.7rem;
     }
     
     .privacy-subtitle {
@@ -250,7 +221,7 @@
     }
     
     .privacy-title {
-        font-size: 2.5rem;
+        font-size: 1.7rem;
     }
     
     .privacy-subtitle {
@@ -292,7 +263,7 @@
     }
     
     .policy-title {
-        font-size: 2rem;
+        font-size: 1.4rem;
         margin-bottom: 1rem;
     }
     
@@ -313,7 +284,7 @@
     }
     
     .privacy-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .privacy-subtitle {
@@ -365,7 +336,6 @@
     }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
     .privacy-section {
         border: 2px solid #4A63F6;
@@ -381,7 +351,6 @@
     }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     .privacy-section {
         animation: none;

@@ -163,7 +163,11 @@ body::after {
     }
     
     .desktop-only {
-        display: none;
+        display: none !important;
+    }
+    
+    .new-section-image {
+        display: none !important;
     }
     
     .mobile-only {

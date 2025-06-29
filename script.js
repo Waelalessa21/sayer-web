@@ -231,36 +231,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 30); 
 
-    // Only finish loader when hero image is fully loaded
-    if (heroImg) {
-        if (heroImg.complete && heroImg.naturalWidth > 0) {
-            // Image is already loaded
-            clearInterval(progressInterval);
-            updateProgress(100);
-            setTimeout(hideLoader, 200);
-        } else {
-            // Wait for image to load
-            heroImg.addEventListener('load', () => {
-                clearInterval(progressInterval);
-                updateProgress(100);
-                setTimeout(hideLoader, 200);
-            });
-            
-            // Handle image load error - still hide loader but log error
-            heroImg.addEventListener('error', () => {
-                console.warn('Hero image failed to load');
-                clearInterval(progressInterval);
-                updateProgress(100);
-                setTimeout(hideLoader, 200);
-            });
-        }
+    if (document.readyState === 'complete') {
+        clearInterval(progressInterval);
+        updateProgress(100);
+        setTimeout(hideLoader, 200);
     } else {
-        // Fallback if hero image doesn't exist - wait for window load
         window.addEventListener('load', () => {
             clearInterval(progressInterval);
             updateProgress(100);
             setTimeout(hideLoader, 200);
         });
+        
+        if (heroImg) {
+            if (heroImg.complete) {
+                clearInterval(progressInterval);
+                updateProgress(100);
+                setTimeout(hideLoader, 200);
+            } else {
+                heroImg.addEventListener('load', () => {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    setTimeout(hideLoader, 200);
+                });
+                heroImg.addEventListener('error', () => {
+                    clearInterval(progressInterval);
+                    updateProgress(100);
+                    setTimeout(hideLoader, 200);
+                });
+            }
+        }
+        
+        setTimeout(() => {
+            clearInterval(progressInterval);
+            updateProgress(100);
+            hideLoader();
+        }, 4000);
     }
 
     const aboutImgs = document.querySelectorAll('.mobile-images .about-img');

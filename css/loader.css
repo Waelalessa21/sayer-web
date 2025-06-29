@@ -35,14 +35,14 @@
 .progress-ring-circle-bg {
     fill: none;
     stroke: rgba(74, 99, 246, 0.1);
-    stroke-width: 4;
+    stroke-width: 2;
 }
 
 .progress-ring-circle {
     fill: none;
     stroke: #4A63F6;
     stroke-linecap: round;
-    stroke-width: 4;
+    stroke-width: 2;
     stroke-dasharray: 339.292;
     stroke-dashoffset: 339.292;
     filter: drop-shadow(0 0 8px rgba(74, 99, 246, 0.3));
@@ -100,7 +100,7 @@
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        stroke-width: 3.5;
+        stroke-width: 2;
     }
     
     .loader-logo {
@@ -117,7 +117,7 @@
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        stroke-width: 3;
+        stroke-width: 2;
     }
     
     .loader-logo {
@@ -134,7 +134,7 @@
     
     .progress-ring-circle-bg,
     .progress-ring-circle {
-        stroke-width: 2.5;
+        stroke-width: 2;
     }
     
     .loader-logo {
